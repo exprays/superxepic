@@ -1,0 +1,31 @@
+<svg width="656" height="530" viewBox="0 0 656 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_281_15)">
+<rect x="7.5" y="7.5" width="641" height="515" rx="77.5" stroke="#FF6E14" stroke-width="15"/>
+<rect x="40" y="40" width="576" height="450" rx="50" fill="#3D2FA9"/>
+<style>
+@font-face {
+	font-family: "PP Pangram Sans";
+	src: url("/fonts/pangram-sans/PPPangramSans-Extrabold.otf") format("opentype");
+	font-weight: 800;
+	font-style: normal;
+}
+</style>
+<text
+	x="328"
+	y="328"
+	text-anchor="middle"
+	fill="white"
+	font-family="PP Pangram Sans, Arial, sans-serif"
+	font-size="190"
+	font-weight="800"
+	letter-spacing="2"
+>
+	SXE
+</text>
+</g>
+<defs>
+<clipPath id="clip0_281_15">
+<rect width="656" height="530" fill="white"/>
+</clipPath>
+</defs>
+</svg>
