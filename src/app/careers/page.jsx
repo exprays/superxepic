@@ -323,7 +323,7 @@ const Page = () => {
           aria-label="Close application form"
         />
 
-        <aside className="career-modal-panel" ref={modalPanelRef}>
+        <aside className="career-modal-panel" ref={modalPanelRef} data-lenis-prevent>
           <div className="career-modal-header">
             <h2>Apply</h2>
             <button type="button" onClick={handleCloseModal}>

@@ -184,6 +184,8 @@
   min-width: 34rem;
   height: 100svh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   background: color-mix(in srgb, var(--base-200) 48%, var(--base-100) 52%);
   border-left: 1px solid color-mix(in srgb, var(--base-300) 38%, transparent);
   padding: 6.5rem 2rem 2rem;
@@ -406,6 +408,9 @@
     min-width: 0;
     padding: 1.25rem;
     padding-top: 6.25rem;
+    padding-bottom: 5rem;
+    height: 100svh;
+    overflow-y: auto;
   }
 
   .careers .career-modal-header h2 {
