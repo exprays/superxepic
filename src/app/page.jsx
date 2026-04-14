@@ -84,13 +84,12 @@ const Page = () => {
             <div className="hero-footer">
               <Copy animateOnScroll={false} delay={isInitialLoad ? 6.05 : 1.15}>
                 <p className="lg">
-                  We build visuals, stories, and systems for people who like
-                  their creativity a little unpredictable.
+                  Bridging high-performance developer systems with cinematic consumer experiences. We build for the unpredictable.
                 </p>
               </Copy>
 
               <Button delay={isInitialLoad ? 6.35 : 1.55} href="/studio">
-                Visit the Studio
+                Explore the Studio
               </Button>
             </div>
           </div>
@@ -104,7 +103,7 @@ const Page = () => {
           <div className="featured-work-header-content">
             <div className="featured-work-header">
               <Copy animateOnScroll={true} delay={0.25}>
-                <h1>Featured Work</h1>
+                <h1>Studio Output</h1>
               </Copy>
             </div>
 
@@ -136,8 +135,7 @@ const Page = () => {
             <div className="featured-work-header-copy">
               <Copy animateOnScroll={true} delay={0.25}>
                 <p className="lg">
-                  From motion to concept, pieces born from quiet sketches, late
-                  nights, and just the right amount of chaos.
+                  A collection of technical craft and visual storytelling. From internal tools to global consumer campaigns.
                 </p>
               </Copy>
             </div>
@@ -152,7 +150,7 @@ const Page = () => {
           <div className="client-reviews-header-content">
             <div className="client-reviews-header">
               <Copy animateOnScroll={true} delay={0.25}>
-                <h1>People Approved</h1>
+                <h1>Field Reports</h1>
               </Copy>
             </div>
 
@@ -184,8 +182,7 @@ const Page = () => {
             <div className="client-reviews-header-copy">
               <Copy animateOnScroll={true} delay={0.25}>
                 <p className="lg">
-                  Unfiltered thoughts from the people who survived our creative
-                  process. Or at least that’s what they told us.
+                  What happened when our systems met the real world. Unfiltered feedback from our developer and consumer partners.
                 </p>
               </Copy>
             </div>
