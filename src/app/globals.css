@@ -25,8 +25,15 @@
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+html,
 body {
   background-color: #000;
   color: var(--base-400);

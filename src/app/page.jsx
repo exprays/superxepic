@@ -9,13 +9,18 @@ import CTACard from "@/components/CTACard/CTACard";
 import Footer from "@/components/Footer/Footer";
 import Copy from "@/components/Copy/Copy";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useViewTransition } from "@/hooks/useViewTransition";
+import { HiArrowRight, HiX } from "react-icons/hi";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Page = () => {
+  const [showBanner, setShowBanner] = useState(true);
+  const { navigateWithTransition } = useViewTransition();
+
   useEffect(() => {
     const rafId = requestAnimationFrame(() => {
       ScrollTrigger.refresh(true);
@@ -33,7 +38,34 @@ const Page = () => {
   return (
     <>
       <Preloader />
-      <section className="hero">
+
+      {showBanner && (
+        <aside className="top-banner">
+          <div
+            className="top-banner-content"
+            onClick={() => navigateWithTransition("/careers")}
+          >
+            <p className="cap">
+              Funding Update: Raising Series A &bull; We're hiring strange
+              thinkers
+            </p>
+            <HiArrowRight className="banner-icon" />
+          </div>
+          <button
+            className="close-banner"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowBanner(false);
+              setTimeout(() => ScrollTrigger.refresh(), 100);
+            }}
+            aria-label="Close banner"
+          >
+            <HiX />
+          </button>
+        </aside>
+      )}
+
+      <section className={`hero ${showBanner ? "banner-offset" : ""}`}>
         <div className="container">
           <div className="hero-content-main">
             <div className="hero-header">

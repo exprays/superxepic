@@ -221,8 +221,8 @@ const Page = () => {
           </div>
 
           <div className="contact-mail">
-            <Button delay={1.3} href="/">
-              studio@politechaos.com
+            <Button delay={1.3} href="/careers">
+              Drop your portfolio
             </Button>
           </div>
 

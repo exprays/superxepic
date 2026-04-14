@@ -10,6 +10,12 @@ nav {
   z-index: 2;
 }
 
+nav.nav-solid {
+  background: color-mix(in srgb, var(--base-100) 82%, var(--base-200) 18%);
+  border-bottom: 1px solid color-mix(in srgb, var(--base-300) 28%, transparent);
+  backdrop-filter: blur(8px);
+}
+
 nav .nav-logo a {
   display: block;
   width: 6rem;

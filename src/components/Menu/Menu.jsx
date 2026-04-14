@@ -6,6 +6,7 @@ import { SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 import { useViewTransition } from "@/hooks/useViewTransition";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -28,6 +29,7 @@ const Menu = ({ pageRef }) => {
   const [isMenuAnimating, setIsMenuAnimating] = useState(false);
 
   const lenis = useLenis();
+  const pathname = usePathname();
 
   const { navigateWithTransition } = useViewTransition();
 
@@ -455,7 +457,7 @@ const Menu = ({ pageRef }) => {
 
   return (
     <>
-      <nav>
+      <nav className="">
         <div className="nav-logo">
           <a
             href="/"
