@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const MAX_RESUME_SIZE_BYTES = 10 * 1024 * 1024;
 const ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
 
@@ -23,12 +19,17 @@ const hasAllowedExtension = (filename = "") => {
 
 export async function POST(request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      console.error("RESEND_API_KEY is missing from environment variables.");
       return NextResponse.json(
-        { error: "RESEND_API_KEY is not configured." },
+        { error: "Mail service configuration missing." },
         { status: 500 }
       );
     }
+
+    const resend = new Resend(apiKey);
 
     const formData = await request.formData();
 
@@ -119,10 +120,10 @@ export async function POST(request) {
         <div style="background-color: #e3e3db; color: #1a1614; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 48px 24px; line-height: 1.5;">
           <div style="max-width: 540px; margin: 0 auto;">
             <div style="margin-bottom: 40px;">
-              <h1 style="font-size: 48px; font-weight: 900; line-height: 0.9; margin: 0; text-transform: uppercase; letter-spacing: -2px;">SUPERXEPIC</h1>
+              <h1 style="font-size: 32px; font-weight: 900; line-height: 0.9; margin: 0; text-transform: uppercase; letter-spacing: -2px;">SUPERXEPIC</h1>
             </div>
 
-            <h2 style="font-size: 32px; font-weight: 800; line-height: 1; margin: 0 0 24px; text-transform: uppercase;">Mischief Managed.</h2>
+            <h2 style="font-size: 26px; font-weight: 800; line-height: 1; margin: 0 0 24px; text-transform: uppercase;">Mischief Managed.</h2>
             
             <p style="font-size: 18px; margin: 0 0 24px;">Hi ${escapeHtml(fullName)},</p>
             

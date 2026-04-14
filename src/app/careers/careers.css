@@ -294,6 +294,48 @@
   color: #b22f2f;
 }
 
+.careers .career-success-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem;
+  background: color-mix(in srgb, var(--base-200) 90%, white 10%);
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.careers .career-success-state.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.careers .career-success-state h2 {
+  font-size: 4rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  letter-spacing: -2px;
+}
+
+.careers .career-success-state p {
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+.careers .career-success-state svg {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 2rem;
+  color: #1f7d40;
+}
+
 .careers .career-submit {
   grid-column: 1 / -1;
   appearance: none;

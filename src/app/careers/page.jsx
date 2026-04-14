@@ -129,6 +129,21 @@ const Page = () => {
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
+  useEffect(() => {
+    if (status.type === "success") {
+      gsap.fromTo(
+        ".career-success-state polyline",
+        { strokeDasharray: 100, strokeDashoffset: 100 },
+        { strokeDashoffset: 0, duration: 0.8, ease: "power2.out", delay: 0.2 }
+      );
+      gsap.fromTo(
+        ".career-success-state h2, .career-success-state p",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out", delay: 0.4 }
+      );
+    }
+  }, [status.type]);
+
   const handleApplyFocus = (roleTitle) => {
     setSelectedRole(roleTitle);
     setStatus({ type: "", message: "" });
@@ -194,14 +209,16 @@ const Page = () => {
 
       setStatus({
         type: "success",
-        message: "Application sent. We will reach out if there is a match.",
+        message: "Application confirmed.",
       });
+
       formElement.reset();
-      setSelectedRole(roles[0].title);
 
       setTimeout(() => {
-        setIsModalOpen(false);
-      }, 800);
+        handleCloseModal();
+        // Reset status after modal fully closed
+        setTimeout(() => setStatus({ type: "", message: "" }), 500);
+      }, 2500);
     } catch (error) {
       setStatus({
         type: "error",
@@ -314,6 +331,28 @@ const Page = () => {
             </button>
           </div>
 
+          <div
+            className={`career-success-state ${
+              status.type === "success" ? "active" : ""
+            }`}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <h2>Mischief Logged.</h2>
+            <p className="lg">
+              Your application for <strong>{selectedRole}</strong> has been
+              received. We'll reach out if there's a match.
+            </p>
+          </div>
+
           <div className="career-modal-body">
             <p className="lg">
               You are applying for the <span>{selectedRole}</span> position. We
@@ -338,7 +377,7 @@ const Page = () => {
             </label>
 
             <label>
-              <span className="sm">Portfolio URL</span>
+              <span className="sm">Portfolio URL (Optional)</span>
               <input
                 type="url"
                 name="portfolio"
