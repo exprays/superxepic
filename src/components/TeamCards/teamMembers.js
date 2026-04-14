@@ -13,13 +13,13 @@ export const teamMembers = [
     img: "/team-cards/team-member-2.jpg",
     alt: "Kenji Mori",
     description:
-      "3D artist, lighting whisperer, and part-time philosopher. Spends half his life rendering and the other half pretending it is done.",
+      "HR Lead, chaos mediator, and professional vibe-checker. Spends half her life hunting talent and the other half explaining to engineers that 'mischief' isn't a billable skill.",
   },
   {
     id: "card-3",
-    name: "Amara Singh",
+    name: "Shafira Yushar",
     img: "/team-cards/team-member-3.jpg",
-    alt: "Amara Singh",
+    alt: "Shafira Yushar",
     description:
       "Motion director and timing addict. Can make anything feel cinematic — even an error message.",
   },
