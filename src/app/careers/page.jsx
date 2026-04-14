@@ -342,7 +342,6 @@ const Page = () => {
               <input
                 type="url"
                 name="portfolio"
-                required
                 placeholder="https://your-portfolio.com"
               />
             </label>

@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export const runtime = "nodejs";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const MAX_RESUME_SIZE_BYTES = 10 * 1024 * 1024;
 const ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
@@ -21,17 +23,9 @@ const hasAllowedExtension = (filename = "") => {
 
 export async function POST(request) {
   try {
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = Number(process.env.SMTP_PORT || 587);
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
-
-    if (!smtpHost || !smtpUser || !smtpPass) {
+    if (!process.env.RESEND_API_KEY) {
       return NextResponse.json(
-        {
-          error:
-            "Mail service is not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, and SMTP_PASS.",
-        },
+        { error: "RESEND_API_KEY is not configured." },
         { status: 500 }
       );
     }
@@ -46,7 +40,8 @@ export async function POST(request) {
     const message = String(formData.get("message") || "").trim();
     const resume = formData.get("resume");
 
-    if (!fullName || !email || !portfolio || !message || !resume) {
+    // Portfolio is now optional
+    if (!fullName || !email || !message || !resume) {
       return NextResponse.json(
         { error: "Please complete all required fields and attach your resume." },
         { status: 400 }
@@ -76,23 +71,13 @@ export async function POST(request) {
       );
     }
 
-    const toEmail =
-      process.env.CAREERS_RECEIVER_EMAIL || "studio@politechaos.com";
-    const fromEmail = process.env.CAREERS_FROM_EMAIL || smtpUser;
-
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: process.env.SMTP_SECURE === "true" || smtpPort === 465,
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
+    const toEmail = process.env.CAREERS_RECEIVER_EMAIL || "studio@politechaos.com";
+    const fromEmail = process.env.CAREERS_FROM_EMAIL || "hello@superxepic.dev";
 
     const resumeBuffer = Buffer.from(await resume.arrayBuffer());
 
-    await transporter.sendMail({
+    // Send notification email to the studio
+    await resend.emails.send({
       from: fromEmail,
       to: toEmail,
       replyTo: email,
@@ -101,7 +86,7 @@ export async function POST(request) {
         `Role: ${role}`,
         `Full name: ${fullName}`,
         `Email: ${email}`,
-        `Portfolio: ${portfolio}`,
+        portfolio ? `Portfolio: ${portfolio}` : "Portfolio: Not provided",
         `Phone: ${phone || "Not provided"}`,
         "",
         "Why you:",
@@ -112,7 +97,7 @@ export async function POST(request) {
         <p><strong>Role:</strong> ${escapeHtml(role)}</p>
         <p><strong>Full Name:</strong> ${escapeHtml(fullName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Portfolio:</strong> <a href="${escapeHtml(portfolio)}" target="_blank" rel="noreferrer noopener">${escapeHtml(portfolio)}</a></p>
+        ${portfolio ? `<p><strong>Portfolio:</strong> <a href="${escapeHtml(portfolio)}" target="_blank" rel="noreferrer noopener">${escapeHtml(portfolio)}</a></p>` : "<p><strong>Portfolio:</strong> Not provided</p>"}
         <p><strong>Phone:</strong> ${escapeHtml(phone || "Not provided")}</p>
         <p><strong>Why You:</strong></p>
         <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
@@ -121,13 +106,12 @@ export async function POST(request) {
         {
           filename: resume.name,
           content: resumeBuffer,
-          contentType: resume.type || "application/octet-stream",
         },
       ],
     });
 
     // Send confirmation email to applicant
-    await transporter.sendMail({
+    await resend.emails.send({
       from: fromEmail,
       to: email,
       subject: `Application Received: ${role} @ SuperXEpic`,
