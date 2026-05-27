@@ -33,7 +33,7 @@ const Footer = () => {
   useEffect(() => {
     const updateTorontoTime = () => {
       const options = {
-        timeZone: "America/Toronto",
+        timeZone: "Asia/Kolkata",
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
@@ -221,7 +221,7 @@ const Footer = () => {
         <div className="footer-byline">
           <div className="footer-time">
             <p>
-              Monte Carlo, MON <span>{torontoTime}</span>
+              Odisha, IND <span>{torontoTime}</span>
             </p>
           </div>
 

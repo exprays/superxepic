@@ -7,6 +7,8 @@ import CustomEase from "gsap/CustomEase";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 
+import { waitForFonts } from "@/utils/fonts";
+
 gsap.registerPlugin(useGSAP, SplitText, CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
 
@@ -38,22 +40,6 @@ const Preloader = () => {
     () => {
       if (!showPreloader) return;
       setLoaderAnimating(true);
-
-      const waitForFonts = async () => {
-        try {
-          await document.fonts.ready;
-          const customFonts = ["Big Shoulders Display"];
-          const fontCheckPromises = customFonts.map((fontFamily) => {
-            return document.fonts.check(`16px ${fontFamily}`);
-          });
-          await Promise.all(fontCheckPromises);
-          await new Promise((resolve) => setTimeout(resolve, 100));
-          return true;
-        } catch (error) {
-          await new Promise((resolve) => setTimeout(resolve, 200));
-          return true;
-        }
-      };
 
       const initializeAnimation = async () => {
         await waitForFonts();

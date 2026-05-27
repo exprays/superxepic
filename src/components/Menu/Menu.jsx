@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 import { useViewTransition } from "@/hooks/useViewTransition";
 import { usePathname } from "next/navigation";
+import { waitForFonts } from "@/utils/fonts";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -53,31 +54,43 @@ const Menu = ({ pageRef }) => {
   const animationFrameRef = useRef(null);
 
   useEffect(() => {
+    let active = true;
     if (isMenuOpen) return;
 
-    const menuCols = menuColsRef.current;
-    if (!menuCols || menuCols.length === 0) return;
+    const initializeCols = async () => {
+      await waitForFonts();
+      if (!active) return;
 
-    menuColSplitTextInstances.current.forEach((split) => split.revert());
-    menuColSplitTextInstances.current = [];
+      const menuCols = menuColsRef.current;
+      if (!menuCols || menuCols.length === 0) return;
 
-    menuCols.forEach((col) => {
-      if (!col) return;
+      menuColSplitTextInstances.current.forEach((split) => split.revert());
+      menuColSplitTextInstances.current = [];
 
-      const elements = col.querySelectorAll("p, a");
+      menuCols.forEach((col) => {
+        if (!col) return;
 
-      elements.forEach((el) => {
-        const split = SplitText.create(el, {
-          type: "lines",
-          mask: "lines",
-          linesClass: "split-line",
+        const elements = col.querySelectorAll("p, a");
+
+        elements.forEach((el) => {
+          const split = SplitText.create(el, {
+            type: "lines",
+            mask: "lines",
+            linesClass: "split-line",
+          });
+
+          menuColSplitTextInstances.current.push(split);
+
+          gsap.set(split.lines, { y: "100%" });
         });
-
-        menuColSplitTextInstances.current.push(split);
-
-        gsap.set(split.lines, { y: "100%" });
       });
-    });
+    };
+
+    initializeCols();
+
+    return () => {
+      active = false;
+    };
   }, [isMenuOpen]);
 
   useGSAP(
@@ -90,47 +103,56 @@ const Menu = ({ pageRef }) => {
       const container = pageRef.current;
       const menuLinkContainers = menuLinkContainersRef.current;
 
-      splitTextInstances.current.forEach((split) => split.revert());
-      splitTextInstances.current = [];
-
-      menuLinks.forEach((link) => {
-        if (!link) return;
-
-        const chars = link.querySelectorAll("span");
-        chars.forEach((char, charIndex) => {
-          const split = new SplitText(char, { type: "chars" });
-          splitTextInstances.current.push(split);
-          split.chars.forEach((char) => {
-            char.classList.add("char");
-          });
-          if (charIndex === 1) {
-            gsap.set(split.chars, { y: "110%" });
-          }
-        });
-      });
-
       gsap.set(menuImage, { y: 0, scale: 0.5, opacity: 0.25 });
-      gsap.set(menuLinks, { y: "150%" });
+      gsap.set(menuLinks.filter(Boolean), { y: "150%" });
       gsap.set(linkHighlighter, { y: "150%" });
 
-      const defaultLinkText = menuLinksWrapper.querySelector(
-        ".menu-link:first-child a span"
-      );
-      if (defaultLinkText) {
-        const linkWidth = defaultLinkText.offsetWidth;
-        linkHighlighter.style.width = linkWidth + "px";
-        currentHighlighterWidth.current = linkWidth;
-        targetHighlighterWidth.current = linkWidth;
+      let active = true;
 
-        const defaultLinkTextElement = menuLinksWrapper.querySelector(
-          ".menu-link:first-child"
+      const initializeLinks = async () => {
+        await waitForFonts();
+        if (!active) return;
+
+        splitTextInstances.current.forEach((split) => split.revert());
+        splitTextInstances.current = [];
+
+        menuLinks.filter(Boolean).forEach((link) => {
+          if (!link) return;
+
+          const chars = link.querySelectorAll("span");
+          chars.forEach((char, charIndex) => {
+            const split = new SplitText(char, { type: "chars" });
+            splitTextInstances.current.push(split);
+            split.chars.forEach((char) => {
+              char.classList.add("char");
+            });
+            if (charIndex === 1) {
+              gsap.set(split.chars, { y: "110%" });
+            }
+          });
+        });
+
+        const defaultLinkText = menuLinksWrapper.querySelector(
+          ".menu-link:first-child a span"
         );
-        const linkRect = defaultLinkTextElement.getBoundingClientRect();
-        const menuWrapperRect = menuLinksWrapper.getBoundingClientRect();
-        const initialX = linkRect.left - menuWrapperRect.left;
-        currentHighlighterX.current = initialX;
-        targetHighlighterX.current = initialX;
-      }
+        if (defaultLinkText) {
+          const linkWidth = defaultLinkText.offsetWidth;
+          linkHighlighter.style.width = linkWidth + "px";
+          currentHighlighterWidth.current = linkWidth;
+          targetHighlighterWidth.current = linkWidth;
+
+          const defaultLinkTextElement = menuLinksWrapper.querySelector(
+            ".menu-link:first-child"
+          );
+          const linkRect = defaultLinkTextElement.getBoundingClientRect();
+          const menuWrapperRect = menuLinksWrapper.getBoundingClientRect();
+          const initialX = linkRect.left - menuWrapperRect.left;
+          currentHighlighterX.current = initialX;
+          targetHighlighterX.current = initialX;
+        }
+      };
+
+      initializeLinks();
 
       const handleMouseMove = (e) => {
         if (window.innerWidth < 1000) return;
@@ -281,6 +303,7 @@ const Menu = ({ pageRef }) => {
       animate();
 
       return () => {
+        active = false;
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
         }
@@ -325,12 +348,12 @@ const Menu = ({ pageRef }) => {
     const container = pageRef.current;
     const menuOverlay = menuOverlayRef.current;
     const menuImage = menuImageRef.current;
-    const menuLinks = menuLinksRef.current;
+    const menuLinks = menuLinksRef.current.filter(Boolean);
     const linkHighlighter = linkHighlighterRef.current;
     const menuLinksWrapper = menuLinksWrapperRef.current;
     const openLabel = openLabelRef.current;
     const closeLabel = closeLabelRef.current;
-    const menuCols = menuColsRef.current;
+    const menuCols = menuColsRef.current.filter(Boolean);
 
     if (!isMenuOpen) {
       gsap.to(openLabel, {
@@ -433,12 +456,12 @@ const Menu = ({ pageRef }) => {
           gsap.set(menuOverlay, {
             clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
           });
-          gsap.set(menuLinks, { y: "150%" });
+          gsap.set(menuLinksRef.current.filter(Boolean), { y: "150%" });
           gsap.set(linkHighlighter, { y: "150%" });
           gsap.set(menuImage, { y: "0", scale: 0.5, opacity: 0.25 });
           gsap.set(".menu-link", { overflow: "hidden" });
 
-          menuCols.forEach((col) => {
+          menuColsRef.current.filter(Boolean).forEach((col) => {
             if (!col) return;
             const splitLines = col.querySelectorAll(".split-line");
             gsap.set(splitLines, { y: "100%" });
@@ -497,8 +520,8 @@ const Menu = ({ pageRef }) => {
           >
             <div className="menu-content-group">
               <p>&copy; SuperXEpic</p>
-              <p>Monte Carlo</p>
-              <p>Monaco</p>
+              <p>Odisha</p>
+              <p>India</p>
             </div>
 
             <div className="menu-content-group">
@@ -513,7 +536,7 @@ const Menu = ({ pageRef }) => {
 
             <div className="menu-content-group">
               <p>Hotline</p>
-              <p>+47 9824 554321</p>
+              <p>+91 78150 42423</p>
             </div>
           </div>
           <div

@@ -8,6 +8,8 @@ import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
+import { waitForFonts } from "@/utils/fonts";
+
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 export default function Button({
@@ -25,30 +27,6 @@ export default function Button({
   const iconRef = useRef(null);
   const splitRef = useRef(null);
   const lines = useRef([]);
-
-  const waitForFonts = async () => {
-    try {
-      await document.fonts.ready;
-
-      const customFonts = [
-        "Geist Mono",
-        "PP Neue Montreal",
-        "PP Pangram Sans",
-        "Big Shoulders Display",
-      ];
-      const fontCheckPromises = customFonts.map((fontFamily) => {
-        return document.fonts.check(`16px ${fontFamily}`);
-      });
-
-      await Promise.all(fontCheckPromises);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      return true;
-    } catch (error) {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      return true;
-    }
-  };
 
   useGSAP(
     () => {
