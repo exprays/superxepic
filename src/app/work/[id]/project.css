@@ -1,0 +1,245 @@
+.sample-project-page {
+  background-color: var(--base-100);
+  color: var(--base-400);
+}
+
+.sample-project-page h3 {
+  font-size: 4rem;
+  letter-spacing: -0.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.sample-project-page .project-header {
+  width: 100vw;
+  height: 50svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5em;
+  padding-bottom: 3em;
+  text-align: center;
+}
+
+.sample-project-page .project-header p {
+  margin-bottom: 2rem;
+}
+
+.sample-project-page .project-details {
+  width: 55%;
+  padding: 8rem 1rem 2rem 1rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.sample-project-page .details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+.sample-project-page .details a.project-link {
+  color: var(--base-500);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.sample-project-page .details a.project-link:hover {
+  opacity: 0.8;
+}
+
+/* Waitlist/Inquiry Form Styling centered to match project-details 55% width */
+.sample-project-page .project-form-section {
+  width: 55%;
+  margin: 6rem auto;
+  padding: 3rem;
+  background-color: var(--base-200);
+  border-radius: 1rem;
+  border: 1px solid rgba(26, 22, 20, 0.1);
+  text-align: left;
+}
+
+.sample-project-page .project-form-section h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.sample-project-page .project-form-section p {
+  color: var(--base-300);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.sample-project-page .project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sample-project-page .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.sample-project-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sample-project-page .form-group label {
+  font-family: "Geist Mono";
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--base-400);
+}
+
+.sample-project-page .form-group input,
+.sample-project-page .form-group textarea {
+  padding: 1rem;
+  border: 1px solid rgba(26, 22, 20, 0.15);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: "PP Neue Montreal";
+  font-size: 1.1rem;
+  color: var(--base-400);
+  transition: all 0.3s ease;
+}
+
+.sample-project-page .form-group input:focus,
+.sample-project-page .form-group textarea:focus {
+  outline: none;
+  border-color: var(--base-500);
+  background-color: #fff;
+}
+
+.sample-project-page .submit-btn {
+  align-self: flex-start;
+  background-color: var(--base-400);
+  color: #fff;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-family: "PP Pangram Sans";
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.sample-project-page .submit-btn:hover {
+  background-color: var(--base-500);
+}
+
+.sample-project-page .submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sample-project-page .form-success-msg {
+  padding: 2rem;
+  background-color: rgba(255, 110, 20, 0.1);
+  color: var(--base-500);
+  border-radius: 0.5rem;
+  font-family: "PP Neue Montreal";
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Loop Navigation Footer matching next-project block */
+.sample-project-page .next-project {
+  width: 100vw;
+  height: 50svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  border-top: 1px solid rgba(26, 22, 20, 0.1);
+  padding: 4rem 1.25rem;
+}
+
+.sample-project-page .next-project a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.sample-project-page .next-project a:hover h3 {
+  color: var(--base-500);
+}
+
+.sample-project-page .next-project h2 {
+  font-size: 6rem;
+  line-height: 1;
+  margin: 0;
+}
+
+.sample-project-page .next-project h3 {
+  font-size: 3rem;
+  color: var(--base-300);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .sample-project-page .project-header {
+    padding: 1.25em 1.25em 3em 1.25em;
+  }
+
+  .sample-project-page .project-details {
+    width: 100%;
+    padding: 6em 1.25em;
+    gap: 3em;
+  }
+
+  .sample-project-page .project-form-section {
+    width: calc(100% - 2.5rem);
+    margin: 4rem 1.25rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .sample-project-page .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-project-page .submit-btn {
+    width: 100%;
+    align-self: center;
+  }
+
+  .sample-project-page h3 {
+    font-size: 2rem;
+  }
+
+  .sample-project-page .next-project {
+    height: auto;
+    padding: 6rem 1.25rem;
+  }
+
+  .sample-project-page .next-project h2 {
+    font-size: 4rem;
+  }
+
+  .sample-project-page .next-project h3 {
+    font-size: 2rem;
+  }
+}

@@ -16,8 +16,8 @@ const Page = () => {
     () => [
       {
         index: "01",
-        name: "Citychild",
-        href: "/sample-project",
+        name: "orange",
+        href: "/work/orange",
         variant: "variant-1",
         images: [
           "/work/work_1_1.jpg",
@@ -27,8 +27,8 @@ const Page = () => {
       },
       {
         index: "02",
-        name: "Chrome Saint",
-        href: "/sample-project",
+        name: "BVMwincity",
+        href: "/work/bvmwincity",
         variant: "variant-2",
         images: [
           "/work/work_2_1.jpg",
@@ -38,8 +38,8 @@ const Page = () => {
       },
       {
         index: "03",
-        name: "G-Dream",
-        href: "/sample-project",
+        name: "Livemarket",
+        href: "/work/livemarket",
         variant: "variant-2",
         images: [
           "/work/work_3_1.jpg",
@@ -49,8 +49,8 @@ const Page = () => {
       },
       {
         index: "04",
-        name: "Stoneface",
-        href: "/sample-project",
+        name: "Customkeys",
+        href: "/work/customkeys",
         variant: "variant-3",
         images: [
           "/work/work_4_1.jpg",
@@ -60,8 +60,8 @@ const Page = () => {
       },
       {
         index: "05",
-        name: "Amber Cloak",
-        href: "/sample-project",
+        name: "steelcontainers",
+        href: "/work/steelcontainers",
         variant: "variant-1",
         images: [
           "/work/work_5_1.jpg",
@@ -71,8 +71,8 @@ const Page = () => {
       },
       {
         index: "06",
-        name: "Paper Blade",
-        href: "/sample-project",
+        name: "Supermind",
+        href: "/work/supermind",
         variant: "variant-2",
         images: [
           "/work/work_6_1.jpg",

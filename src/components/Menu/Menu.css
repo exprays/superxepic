@@ -232,6 +232,7 @@ nav .close-label {
 }
 
 @media (max-width: 1000px) {
+
   nav,
   .menu-overlay .menu-links-wrapper {
     padding: 1.25rem;

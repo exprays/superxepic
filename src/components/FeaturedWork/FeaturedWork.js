@@ -92,6 +92,8 @@ export default function FeaturedWork() {
       };
       links.forEach((a) => a.addEventListener("click", handleClick));
 
+      ScrollTrigger.refresh();
+
       return () => {
         links.forEach((a) => a.removeEventListener("click", handleClick));
       };

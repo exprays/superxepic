@@ -81,6 +81,143 @@
   width: 50%;
 }
 
+/* Services Section (Dark Mode Design System List) */
+.services-section {
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+  background-color: var(--base-400); /* Sleek Off-Black */
+  color: var(--base-100);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.services-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.services-header-top span,
+.services-header-main .services-header-side,
+.service-row-tag {
+  font-family: "PP Pangram Sans" !important;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--base-300);
+  transition: color 0.3s ease;
+}
+
+.services-header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.services-header-main h1 {
+  font-size: 6rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--base-100);
+  letter-spacing: 0;
+}
+
+.services-header-main .services-header-side {
+  padding-bottom: 1rem;
+  white-space: nowrap;
+}
+
+.services-list {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-row-line {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(227, 227, 219, 0.15);
+  will-change: transform;
+}
+
+.service-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.25rem 2rem;
+  cursor: pointer;
+  transition: background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              padding-left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: padding-left, background-color;
+}
+
+.service-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+  padding-left: 3.5rem;
+}
+
+.service-row-left {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex: 1;
+}
+
+.service-row-schematic {
+  width: 80px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--base-300);
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.service-row:hover .service-row-schematic {
+  color: var(--base-500); /* Turns into signature orange! */
+}
+
+.service-row-title {
+  font-family: "Big Shoulders Display";
+  font-size: 3.25rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--base-100);
+  margin: 0;
+  transition: color 0.3s ease;
+  letter-spacing: 0;
+}
+
+.service-row:hover .service-row-title {
+  color: var(--base-100);
+}
+
+.service-row-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.service-row-tag {
+  text-align: right;
+}
+
+.service-row:hover .service-row-tag {
+  color: var(--base-100);
+}
+
 .client-reviews-header-container {
   position: relative;
   width: 100%;
@@ -109,13 +246,204 @@
   width: 3rem;
 }
 
-.client-reviews-header-container
-  .client-reviews-header-content
-  .client-reviews-header-copy {
+
+/* Pricing Section (Light Theme) */
+.pricing-section {
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+  background-color: var(--base-100);
+  color: var(--base-400);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.pricing-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.pricing-header-top span.sm {
+  font-family: "PP Pangram Sans" !important;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--base-300);
+}
+
+.pricing-header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.pricing-header-main h1 {
+  font-size: 6rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--base-400);
+  letter-spacing: 0;
+}
+
+.pricing-header-main .pricing-header-side {
+  font-family: "PP Pangram Sans" !important;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--base-300);
+  padding-bottom: 1rem;
+  white-space: nowrap;
+}
+
+.pricing-plans-grid {
+  display: flex;
+  gap: 3rem;
+  width: 100%;
+}
+
+.pricing-card {
+  flex: 1;
+  background-color: var(--base-200);
+  border-radius: 1.5rem;
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(26, 22, 20, 0.12);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, box-shadow;
+}
+
+.pricing-card.premium {
+  border: 1.5px solid var(--base-500); /* Orange signature focus outline */
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(26, 22, 20, 0.08);
+}
+
+.pricing-card-label {
+  font-family: "PP Pangram Sans" !important;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--base-300);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.pricing-card-name {
+  font-family: "Big Shoulders Display";
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--base-400);
+  margin: 0 0 2rem 0;
+  letter-spacing: 0;
+}
+
+.pricing-card-price-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(26, 22, 20, 0.1);
+  padding-bottom: 2rem;
+}
+
+.price-value {
+  font-family: "Big Shoulders Display";
+  font-size: 11rem;
+  font-weight: 900;
+  color: var(--base-400);
+  line-height: 0.85;
+  margin: 0;
+  letter-spacing: -0.2rem;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.price-value .currency {
+  font-size: inherit;
+  font-weight: inherit;
+  vertical-align: baseline;
+  margin-right: 0.2rem;
+  color: var(--base-500);
+  letter-spacing: 0;
+}
+
+.price-suffix {
+  font-family: "PP Pangram Sans" !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--base-300);
+  margin-left: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.pricing-card-desc {
+  font-family: "PP Neue Montreal";
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--base-300);
+  margin: 0 0 2.5rem 0;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pricing-features li {
+  font-family: "PP Neue Montreal";
+  font-size: 1.15rem;
+  color: var(--base-400);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pricing-features li::before {
+  content: "•";
+  color: var(--base-500);
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 0;
+  margin-top: -0.1rem;
+}
+
+.pricing-disclaimer {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.pricing-disclaimer p.sm {
+  font-family: "PP Pangram Sans" !important;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--base-300);
+}
+
+.client-reviews-header-container .client-reviews-header-content .client-reviews-header-copy {
   width: 50%;
 }
 
 @media (max-width: 1000px) {
+
   .hero .container .hero-content-main,
   .hero .container .hero-content-main .hero-footer {
     width: 100%;
@@ -128,9 +456,7 @@
   .featured-work .featured-work-header-content .featured-work-header-copy,
   .client-reviews-header-container .client-reviews-header,
   .client-reviews-header-container .client-reviews-header-content,
-  .client-reviews-header-container
-    .client-reviews-header-content
-    .client-reviews-header-copy {
+  .client-reviews-header-container .client-reviews-header-content .client-reviews-header-copy {
     width: 100%;
   }
 
@@ -141,6 +467,61 @@
   .featured-work-list .row {
     width: 100% !important;
     flex-direction: column;
+  }
+
+  .services-header-top {
+    margin-bottom: 1.5rem;
+  }
+
+  .services-header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .services-header-main h1 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .services-header-main .services-header-side {
+    padding-bottom: 0;
+  }
+
+  .service-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.75rem 1rem;
+  }
+
+  .service-row:hover {
+    padding-left: 1.5rem;
+  }
+
+  .service-row-left {
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .service-row-schematic {
+    width: 60px;
+    height: 38px;
+  }
+
+  .service-row-title {
+    font-size: 2.25rem;
+  }
+
+  .service-row-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .service-row-tag {
+    text-align: left;
+    font-size: 0.8rem;
   }
 }
 
@@ -222,10 +603,54 @@
   }
 
   .hero.banner-offset {
-    padding-top: 4rem; /* More space for wrapped text on mobile */
+    padding-top: 4rem;
+    /* More space for wrapped text on mobile */
   }
 
   :root:has(.top-banner) nav {
     transform: translateY(4rem);
+  }
+
+  /* Pricing Section Mobile Styles */
+  .pricing-header-top {
+    margin-bottom: 1.5rem;
+  }
+
+  .pricing-header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .pricing-header-main h1 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .pricing-header-main .pricing-header-side {
+    padding-bottom: 0;
+  }
+
+  .pricing-plans-grid {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .pricing-card {
+    padding: 3rem 2rem;
+  }
+
+  .price-value {
+    font-size: 7.5rem;
+    letter-spacing: -0.1rem;
+  }
+
+  .price-value .currency {
+    font-size: inherit;
+  }
+
+  .pricing-disclaimer {
+    margin-top: 3rem;
   }
 }
